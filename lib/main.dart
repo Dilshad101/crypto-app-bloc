@@ -1,6 +1,7 @@
 import 'package:crypto_bloc/presentation/blocs/home_bloc/crypto_bloc.dart';
 import 'package:crypto_bloc/presentation/blocs/home_bloc/crypto_event.dart';
 import 'package:crypto_bloc/presentation/blocs/home_bloc/crypto_state.dart';
+import 'package:crypto_bloc/presentation/blocs/watchlist_bloc/watchlist_bloc.dart';
 import 'package:crypto_bloc/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,52 +31,15 @@ class MyApp extends StatelessWidget {
           appBarTheme: const AppBarTheme(
               backgroundColor: Colors.transparent, elevation: 0),
           textTheme: GoogleFonts.dmSansTextTheme()),
-      home:  BlocProvider(
-        create: (context) => CryptoBloc(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => CryptoBloc(),
+          ),
+          BlocProvider(create: (context) => WatchlistBloc()),
+        ],
         child: const ScreenHome(),
       ),
-    );
-  }
-}
-
-class Try extends StatefulWidget {
-  const Try({super.key});
-
-  @override
-  State<Try> createState() => _TryState();
-}
-
-class _TryState extends State<Try> {
-  final bloc = CryptoBloc();
-  @override
-  void initState() {
-    bloc.add(InitialEvent());
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<CryptoBloc, CryptoState>(
-      bloc: bloc,
-      listener: (context, state) {},
-      builder: (context, state) {
-        if (state is LoadingState) {
-          return const Center(
-            child: CircularProgressIndicator(color: Colors.yellow),
-          );
-        } else if (state is CryptoFetchSuccessState) {
-          return Container(
-            color: Colors.yellow,
-          );
-        } else if (state is CryptoErrorState) {
-          return const Scaffold(
-              body: Center(
-            child: Text('Somthing went wrong'),
-          ));
-        }
-
-        return const SizedBox();
-      },
     );
   }
 }

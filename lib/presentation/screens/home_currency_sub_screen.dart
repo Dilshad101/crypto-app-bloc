@@ -24,6 +24,7 @@ class CurrencyPage extends StatelessWidget {
         } else if (state is CryptoFetchSuccessState) {
           final cryptoList = state.cryptoList;
           final leadingCoin = cryptoList[0];
+          final modifiedList = cryptoList.sublist(1);
           return ListView(
             shrinkWrap: true,
             padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -31,39 +32,40 @@ class CurrencyPage extends StatelessWidget {
             children: [
               vSpace20,
               LargeTile(
-                  rank: leadingCoin.marketCapRank,
-                  imageUrl: leadingCoin.image,
-                  symbol: leadingCoin.symbol,
-                  name: leadingCoin.name,
-                  price: leadingCoin.currentPrice,
-                  priceChangePercentage: leadingCoin.priceChangePercentage24h,
-                  heighestPrice: leadingCoin.high24h,
-                  lowestPrice: leadingCoin.low24h),
+                rank: leadingCoin.marketCapRank,
+                imageUrl: leadingCoin.image,
+                symbol: leadingCoin.symbol,
+                name: leadingCoin.name,
+                price: leadingCoin.currentPrice,
+                priceChangePercentage: leadingCoin.priceChangePercentage24h,
+                heighestPrice: leadingCoin.high24h,
+                lowestPrice: leadingCoin.low24h,
+              ),
               vSpace20,
               ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  final coin=cryptoList[index];
+                  final coin = modifiedList[index];
                   return SubTile(
                     rank: coin.marketCapRank,
                     imageUrl: coin.image,
                     symbol: coin.symbol,
                     name: coin.name,
                     price: coin.currentPrice,
-                    priceChangePercentage: coin.priceChangePercentage24h);
+                    priceChangePercentage: coin.priceChangePercentage24h,
+                    coin: coin,
+                  );
                 },
                 separatorBuilder: (context, index) => const Divider(),
-                itemCount: cryptoList.length,
+                itemCount: modifiedList.length,
               ),
               vSpace10
             ],
           );
         } else if (state is CryptoErrorState) {
-          return const Center(
-            child: Text('Somthing went wrong'),
-          );
-        } else {                  
+          return const Center(child: Text('Somthing went wrong'));
+        } else {
           return const SizedBox();
         }
       },

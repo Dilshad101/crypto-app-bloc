@@ -3,21 +3,22 @@ import 'package:flutter/material.dart';
 import '../constents/spaces.dart';
 
 class CoinDetails extends StatelessWidget {
-  const CoinDetails({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    this.isPriceTag = false,
-    required this.color,
-    required this.titleSize,
-    required this.subtitleSize,
-  });
+  const CoinDetails(
+      {super.key,
+      required this.title,
+      required this.subtitle,
+      this.isPriceTag = false,
+      required this.color,
+      required this.titleSize,
+      required this.subtitleSize,
+      this.icon,});
   final String title;
   final String subtitle;
   final bool isPriceTag;
   final Color color;
   final double titleSize;
   final double subtitleSize;
+  final IconData? icon;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -38,13 +39,22 @@ class CoinDetails extends StatelessWidget {
               ),
             ),
             vSpace5,
-            Text(
-              ' $subtitle',
-              style: TextStyle(
-                  fontSize: subtitleSize,
-                  // fontSize: isPriceTag ? 16 : 20,
+            Row(
+              children: [
+                Icon(
+                  icon,
                   color: color,
-                  fontWeight: FontWeight.bold),
+                  size: 14,
+                ),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                      fontSize: subtitleSize,
+                      // fontSize: isPriceTag ? 16 : 20,
+                      color: color,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
             )
           ],
         ),

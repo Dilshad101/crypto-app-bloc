@@ -1,5 +1,6 @@
 import 'package:crypto_bloc/presentation/blocs/home_bloc/crypto_bloc.dart';
 import 'package:crypto_bloc/presentation/blocs/home_bloc/crypto_event.dart';
+import 'package:crypto_bloc/presentation/blocs/watchlist_bloc/watchlist_bloc.dart';
 import 'package:crypto_bloc/presentation/screens/home_currency_sub_screen.dart';
 import 'package:crypto_bloc/presentation/screens/home_watchlist_sub_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class _ScreenHomeState extends State<ScreenHome> {
   void initState() {
     super.initState();
     context.read<CryptoBloc>().add(InitialEvent());
+    context.read<WatchlistBloc>().add(WatchListInitialEvent());
   }
 
   @override
@@ -45,6 +47,7 @@ class _ScreenHomeState extends State<ScreenHome> {
             ),
             Expanded(
               child: TabBarView(
+                physics: BouncingScrollPhysics(),
                 children: [
                   CurrencyPage(),
                   WatchListPage(),

@@ -5,8 +5,8 @@ import 'package:crypto_bloc/data/data_sources/home_watchlist_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SubTile extends StatelessWidget {
-  const SubTile(
+class WatchListSubTile extends StatelessWidget {
+  const WatchListSubTile(
       {super.key,
       required this.rank,
       required this.imageUrl,
@@ -118,17 +118,10 @@ class SubTile extends StatelessWidget {
                 vSpace10,
                 TextButton.icon(
                   onPressed: () {
-                    if(!watchList.contains(coin)){
-                        watchList.add(coin);
-                         context
+                    // watchList.add(coin);
+                    context
                         .read<WatchlistBloc>()
-                        .add(WatchListAddEvent(watchList: watchList));
-                    }else{
-                      print('already added');
-                    }
-                  
-
-                   
+                        .add(WatchListRemoveEvent(watchList: watchList,coin: coin));
                   },
                   label: const Text(
                     'WatchList',
@@ -138,7 +131,7 @@ class SubTile extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1),
                   ),
-                  icon: const Icon(Icons.add,color: Colors.grey,),
+                  icon: const Icon(Icons.remove,size: 18,color: Colors.grey,),
                 )
               ],
             ),

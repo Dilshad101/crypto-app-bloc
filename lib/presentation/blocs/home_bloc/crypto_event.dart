@@ -1,3 +1,3 @@
-abstract class CryptoEvent{}
+abstract class CryptoEvent {}
 
-class InitialEvent extends CryptoEvent{}
+class InitialEvent extends CryptoEvent {}

@@ -1,4 +1,10 @@
-class CryptoCurrency{
+
+
+// ignore_for_file: must_be_immutable
+
+import 'package:equatable/equatable.dart';
+
+class CryptoCurrency extends Equatable{
   String id;
   String symbol;
   String name;
@@ -8,6 +14,8 @@ class CryptoCurrency{
   num high24h;
   num low24h;
   double priceChangePercentage24h;
+
+  
 
   CryptoCurrency({
     required this.id,
@@ -20,6 +28,8 @@ class CryptoCurrency{
     required this.low24h,
     required this.priceChangePercentage24h,
   });
+
+  
 
   factory CryptoCurrency.fromJson(Map<String, dynamic> json) {
     return CryptoCurrency(
@@ -35,6 +45,8 @@ class CryptoCurrency{
     );
   }
 
+  
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -48,4 +60,16 @@ class CryptoCurrency{
       'price_change_percentage_24h': priceChangePercentage24h,
     };
   }
+ @override
+  List<Object?> get props => [
+        id,
+        symbol,
+        name,
+        image,
+        currentPrice,
+        marketCapRank,
+        high24h,
+        low24h,
+        priceChangePercentage24h,
+      ];
 }

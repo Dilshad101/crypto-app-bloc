@@ -20,4 +20,8 @@ class CryptoBloc extends Bloc<CryptoEvent, CryptoState> {
       emit(CryptoErrorState());
     }
   }
+
+
+
+
 }

@@ -94,7 +94,8 @@ class LargeTile extends StatelessWidget {
               ),
               CoinDetails(
                   title: '24h',
-                  subtitle: '$priceChangePercentage%',
+                  icon: priceChangePercentage < 0 ? Icons.remove : Icons.add,
+                  subtitle: '${priceChangePercentage.abs()}%',
                   color: priceChangePercentage < 0
                       ? Colors.redAccent
                       : Colors.green,
